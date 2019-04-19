@@ -44,6 +44,20 @@ class Film
     Customer.map_items(films)
   end
 
+  def num_of_customers()
+    sql = "SELECT name FROM customers
+    INNER JOIN tickets
+    ON tickets.customer_id = customers.id
+    INNER JOIN films
+    ON tickets.film_id = films.id
+    WHERE film_id = $1;"
+    values = [@id]
+    customer_hash = SqlRunner.run(sql, values)
+    customers = customer_hash.map { |customer| customer['name'] }
+    num_of_customers = customers.count
+    return num_of_customers
+  end
+
   def self.map_items(film_data)
     results = film_data.map { |film| Film.new(film) }
     return results

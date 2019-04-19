@@ -1,20 +1,20 @@
 require_relative("../db/sql_runner")
 require_relative("customers")
-require_relative("films")
+require_relative("screenings")
 
 class Ticket
 
-  attr_reader :id, :customer_id, :film_id
+  attr_reader :id, :customer_id, :screening_id
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
     @customer_id = options['customer_id'].to_i
-    @film_id = options['film_id'].to_i
+    @screening_id = options['screening_id'].to_i
   end
 
   def save()
-    sql = "INSERT INTO tickets (customer_id, film_id) VALUES ($1, $2) RETURNING id;"
-    values = [@customer_id, @film_id]
+    sql = "INSERT INTO tickets (customer_id, screening_id) VALUES ($1, $2) RETURNING id;"
+    values = [@customer_id, @screening_id]
     ticket = SqlRunner.run(sql, values).first
     @id = ticket['id'].to_i
   end
@@ -33,10 +33,10 @@ class Ticket
   # end
 
   def film()
-    sql = "SELECT * FROM films WHERE id = $1;"
-    values = [@film_id]
+    sql = "SELECT * FROM screenings WHERE id = $1;"
+    values = [@screening_id]
     film = SqlRunner.run(sql, values).first
-    return Film.new(film)
+    return Screening.new(film)
   end
 
   def customer()
