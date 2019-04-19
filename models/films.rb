@@ -25,6 +25,16 @@ class Film
     return results
   end
 
+  def self.all()
+    sql = "SELECT * FROM films;"
+    films = SqlRunner.run(sql)
+    return self.map_items(films)
+  end
+
+  def self.delete_all()
+    sql = "DELETE FROM films;"
+    SqlRunner.run(sql)
+  end
 
 
 

@@ -24,6 +24,17 @@ class Ticket
     return results
   end
 
+  def self.all()
+    sql = "SELECT * FROM tickets;"
+    tickets = SqlRunner.run(sql)
+    return self.map_items(tickets)
+  end
+
+  def self.delete_all()
+    sql = "DELETE FROM tickets;"
+    SqlRunner.run(sql)
+  end
+
 
 
 
