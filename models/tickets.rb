@@ -32,6 +32,20 @@ class Ticket
   #   SqlRunner.run(sql, values)
   # end
 
+  def film()
+    sql = "SELECT * FROM films WHERE id = $1;"
+    values = [@film_id]
+    film = SqlRunner.run(sql, values).first
+    return Film.new(film)
+  end
+
+  def customer()
+    sql = "SELECT * FROM customers WHERE id = $1;"
+    values = [@customer_id]
+    film = SqlRunner.run(sql, values).first
+    return Customer.new(film)
+  end
+
   def self.map_items(ticket_data)
     results = ticket_data.map { |ticket| Ticket.new(ticket) }
     return results
