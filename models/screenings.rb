@@ -33,6 +33,22 @@ class Screening
     SqlRunner.run(sql, values)
   end
 
+  def most_popular_film_showing
+    sql = "SELECT tickets.screening_id FROM tickets WHERE id = $1"
+    values = [@id]
+    SqlRunner.run(sql, values)
+  end
+
+  # sql = "SELECT users.* FROM users
+  #   INNER JOIN visits
+  #   ON visits.user_id = users.id
+  #   WHERE visits.location_id = $1;"
+  #   values = [@id]
+  #   users = SqlRunner.run(sql, values)
+  #   results = users.map { |user| User.new(user)  }
+  #   return results
+  # end
+
   def self.map_items(screening_data)
     results = screening_data.map { |screening| Screening.new(screening) }
     return results
