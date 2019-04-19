@@ -19,6 +19,13 @@ class Ticket
     @id = ticket['id'].to_i
   end
 
+# NOTE: CHANGE THIS
+  # def update()
+  #   sql = "UPDATE tickets SET ?? = $1 WHERE id = $2"
+  #   values = [?? @id]
+  #   SqlRunner.run(sql, values)
+  # end
+
   def self.map_items(ticket_data)
     results = ticket_data.map { |ticket| Ticket.new(ticket) }
     return results

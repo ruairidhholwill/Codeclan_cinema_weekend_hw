@@ -20,6 +20,12 @@ class Customer
     @id = customer['id'].to_i
   end
 
+  def update()
+    sql = "UPDATE customers SET name = $1, funds = $2 WHERE id = $3"
+    values = [@name, @funds, @id]
+    SqlRunner.run(sql, values)
+  end
+
   def self.map_items(customer_data)
     results = customer_data.map { |customer| Customer.new(customer) }
     return results
@@ -35,9 +41,6 @@ class Customer
     sql = "DELETE FROM customers;"
     SqlRunner.run(sql)
   end
-
-
-
 
 
 end
