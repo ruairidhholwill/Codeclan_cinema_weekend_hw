@@ -33,6 +33,12 @@ ticket4.save()
 ticket5 = Ticket.new({ 'customer_id' => customer2.id, 'film_id' => film3.id })
 ticket5.save()
 
+# customer1.name = 'Pam'
+# customer1.update()
+#
+# customer3.delete()
+# film1.delete()
+
 
 
 

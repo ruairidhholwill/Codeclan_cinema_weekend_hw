@@ -19,7 +19,13 @@ class Ticket
     @id = ticket['id'].to_i
   end
 
-# NOTE: CHANGE THIS
+  def delete()
+    sql = "DELETE FROM tickets WHERE id = $1;"
+    values = [@id]
+    SqlRunner.run(sql, values)
+  end
+
+# NOTE: IS THIS NEEDED?
   # def update()
   #   sql = "UPDATE tickets SET ?? = $1 WHERE id = $2"
   #   values = [?? @id]
