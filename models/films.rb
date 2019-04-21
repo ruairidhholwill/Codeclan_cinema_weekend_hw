@@ -59,6 +59,24 @@ class Film
     return num_of_customers
   end
 
+  def list_duplicates(array)
+  duplicates = array.select { |e| array.count(e) > 1 }
+  duplicates.uniq
+  end
+
+  def popular_screening
+    sql = "SELECT screenings.showing FROM screenings
+    INNER JOIN tickets
+    ON tickets.screening_id = screenings.id
+    INNER JOIN films
+    ON tickets.film_id = films.id
+    WHERE screenings.film_id = $1;"
+    values = [@id]
+    popular_hash = SqlRunner.run(sql, values)
+    popular_times = popular_hash.map { |film| film['showing'].to_f  }
+    return list_duplicates(popular_times)
+  end
+
   def self.map_items(film_data)
     results = film_data.map { |film| Film.new(film) }
     return results
