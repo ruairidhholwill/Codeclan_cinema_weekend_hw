@@ -93,5 +93,4 @@ class Customer
     SqlRunner.run(sql)
   end
 
-
 end

@@ -92,11 +92,5 @@ class Film
     sql = "DELETE FROM films;"
     SqlRunner.run(sql)
   end
-
-
-
-
-
-
-
+  
 end
